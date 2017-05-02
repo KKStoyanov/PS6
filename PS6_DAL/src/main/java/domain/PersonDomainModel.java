@@ -2,6 +2,8 @@ package domain;
 
 
 import java.time.LocalDate;
+import java.util.Date;
+import java.util.UUID;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
@@ -16,17 +18,123 @@ import util.LocalDateAdapter;
 
 public class PersonDomainModel {
 
+	/*private UUID PersonID;
     private  StringProperty firstName;
     private  StringProperty lastName;
     private  StringProperty street;
     private  IntegerProperty postalCode;
     private  StringProperty city;
     private  ObjectProperty<LocalDate> birthday;
-
+*/
+	private UUID PersonID;
+    private  String firstName;
+    private  String lastName;
+    private  String street;
+    private  Integer postalCode;
+    private  String city;
+    private  Date birthday;
     /**
      * Default constructor.
      */
 
+    public PersonDomainModel(String fName, String lName, Date bday) {
+		super();
+		this.setPersonID(UUID.randomUUID());		
+		firstName = fName;
+		lastName = lName;
+		birthday = bday;		
+	}
+
+	public PersonDomainModel(PersonDomainModel per)
+	{
+		super();
+		this.setPersonID(UUID.randomUUID());		
+		firstName = per.getFirstName();
+		lastName = per.getLastName();
+		street = per.getStreet();
+		postalCode = per.getPostalCode();
+		city = per.getCity();
+		birthday = per.getBirthday();
+		
+	}
+	
+	/**
+	 * Student - This constructor will retrieve a give student ID's record.
+	 * @param personID
+	 */
+	
+	public PersonDomainModel(UUID personID) {
+		super();
+		PersonID = personID;		
+	}
+
+	public UUID getPersonID() {
+		return PersonID;
+	}
+	private void setPersonID(UUID personID) {
+		PersonID = personID;
+	}
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String fName) {
+        firstName = fName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lName) {
+        lastName = lName;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street1) {
+        street = street1;
+    }
+
+    public int getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(int postCode) {
+        postalCode = postCode;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city1) {
+        city = city1;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date bday) {
+        birthday = bday;
+    }
+
+
+	/*public PersonDomainModel(UUID personID) {
+		super();
+		PersonID = personID;		
+	}
+
+	public UUID getPersonID() {
+		return PersonID;
+	}
+	private void setPersonID(UUID personID) {
+		PersonID = personID;
+	}
 
     public String getFirstName() {
         return firstName.get();
@@ -99,5 +207,5 @@ public class PersonDomainModel {
 
     public ObjectProperty<LocalDate> birthdayProperty() {
         return birthday;
-    }
+    }*/
 }
