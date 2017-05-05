@@ -19,7 +19,7 @@ public class PersonDAL {
 	public static PersonDomainModel addPerson(PersonDomainModel per) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction tx = null;
-		int employeeID = 0;
+ 
 		try {
 			tx = session.beginTransaction();
 			session.save(per);
@@ -37,14 +37,14 @@ public class PersonDAL {
 	public static ArrayList<PersonDomainModel> getPersons() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction tx = null;
-		PersonDomainModel perGet = null;		
+		StudentDomainModel perGet = null;		
 		ArrayList<PersonDomainModel> pers = new ArrayList<PersonDomainModel>();
 		
 		try {
 			tx = session.beginTransaction();	
 			
-			List people = session.createQuery("FROM PersonDomainModel").list();
-			for (Iterator iterator = people.iterator(); iterator.hasNext();) {
+			List persons = session.createQuery("FROM PersonDomainModel").list();
+			for (Iterator iterator = persons.iterator(); iterator.hasNext();) {
 				PersonDomainModel per = (PersonDomainModel) iterator.next();
 				pers.add(per);
 
@@ -59,7 +59,8 @@ public class PersonDAL {
 			session.close();
 		}
 		return pers;
-	}	
+
+	}
 
 	public static PersonDomainModel getPerson(UUID perID) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
@@ -69,7 +70,7 @@ public class PersonDAL {
 		try {
 			tx = session.beginTransaction();	
 									
-			Query query = session.createQuery("from PersonDomainModel where personId = :id ");
+			Query query = session.createQuery("from PersonDomainModel where PersonId = :id ");
 			query.setParameter("id", perID.toString());
 			
 			List<?> list = query.list();
@@ -84,7 +85,7 @@ public class PersonDAL {
 			session.close();
 		}
 		return perGet;
-	}		
+	}
 
 	public static void deletePerson(UUID perID) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
@@ -106,13 +107,12 @@ public class PersonDAL {
 		} finally {
 			session.close();
 		}
-
-	}	
+	}
 
 	public static PersonDomainModel updatePerson(PersonDomainModel per) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction tx = null;
-		StudentDomainModel perGet = null;		
+		PersonDomainModel perGet = null;		
 		
 		try {
 			tx = session.beginTransaction();	
@@ -130,6 +130,5 @@ public class PersonDAL {
 		}
 
 		return per;
-	}		
-	
+	}
 }
